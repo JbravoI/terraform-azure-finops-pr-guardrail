@@ -1,0 +1,37 @@
+name: Guardrail Fixture Verification
+
+on:
+  pull_request:
+    paths:
+      - action/**
+      - fixtures/**
+      - policies/**
+      - scripts/**
+      - tests/**
+      - package.json
+      - .github/workflows/fixture-guardrail.yml
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  verify-fixtures:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run fixture test suite
+        run: node --test
+      - name: Publish fixture review
+        uses: ./action
+        with:
+          plan-path: fixtures/cost-delta/plan.json
+          policy-path: fixtures/cost-delta/config.yml
+          pull-request-number: ${{ github.event.pull_request.number }}
+          github-token: ${{ github.token }}

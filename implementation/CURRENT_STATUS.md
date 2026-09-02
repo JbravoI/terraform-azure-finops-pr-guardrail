@@ -4,7 +4,7 @@ Last updated: 2 September 2026
 
 ## Overall status
 
-**Phase 3 - Policy controls: complete.** The project now validates required tags and supports configurable review or fail outcomes for unknown costs and cost-threshold breaches. GitHub workflow and approval-rule integration are not implemented.
+**Phase 4 - Reusable workflow and hardening: complete.** The project now has a composite action, reusable workflow, fixture workflow, marker-based comment updater, and restricted workflow permissions. A live GitHub run and live Infracost integration have not occurred.
 
 ## Delivery status by area
 
@@ -20,9 +20,9 @@ Last updated: 2 September 2026
 | Cost estimation | Fixture implementation | Deterministic test-only catalog in `scripts/evaluate-plan.mjs`; Infracost is selected for future production integration. |
 | PR feedback | Fixture implementation | Markdown renderer is tested locally; GitHub publication is not implemented. |
 | Tags and threshold controls | Implemented locally | Configurable YAML policy, stable finding IDs, blocking outcomes, and fixture coverage exist. |
-| Reusable workflow | Planned | Phase 4. |
+| Reusable workflow | Implemented | Composite action, reusable Terraform workflow, and fixture workflow are present; GitHub-hosted validation is pending. |
 | Release evidence | Planned | Phase 5. |
 
 ## Next work
 
-Start Phase 4: package the evaluator as a reusable GitHub Actions workflow, minimise permissions, redact sensitive plan data, and update one stable pull-request comment. Update this file and `docs/TRACEABILITY_MAP.md` whenever status changes.
+Start Phase 5: complete release documentation, test matrix, troubleshooting evidence, changelog, release notes, and a sample pull request reference. Update this file and `docs/TRACEABILITY_MAP.md` whenever status changes.

@@ -1,0 +1,100 @@
+name: Terraform Azure FinOps Guardrail
+description: Evaluate a Terraform plan JSON against FinOps policy and update one pull-request comment.
+inputs:
+  plan-path:
+    description: Path to the Terraform JSON plan created with terraform show -json.
+    required: true
+  policy-path:
+    description: Path to the guardrail YAML policy file.
+    required: true
+  pull-request-number:
+    description: Pull-request number to comment on. Leave empty when no comment should be published.
+    required: false
+    default: ''
+  github-token:
+    description: Token with pull-requests write permission when comment publication is required.
+    required: false
+    default: ''
+outputs:
+  result:
+    description: Guardrail result: pass, review, or fail.
+    value: ${{ steps.evaluate.outputs.result }}
+runs:
+  using: composite
+  steps:
+    - id: evaluate
+      name: Evaluate Terraform plan
+      shell: bash
+      env:
+        PLAN_PATH: ${{ inputs.plan-path }}
+        POLICY_PATH: ${{ inputs.policy-path }}
+        COMMENT_PATH: ${{ runner.temp }}/terraform-finops-guardrail-comment.md
+        RESULT_PATH: ${{ runner.temp }}/terraform-finops-guardrail-result.json
+      run: |
+        set +e
+        node "$GITHUB_ACTION_PATH/../scripts/evaluate-plan.mjs" "$PLAN_PATH" "$POLICY_PATH" "$COMMENT_PATH" "$RESULT_PATH"
+        evaluation_exit=$?
+
+        if [ -f "$RESULT_PATH" ]; then
+          result=$(node -p "JSON.parse(require('fs').readFileSync(process.env.RESULT_PATH, 'utf8')).result")
+        else
+          result=fail
+          {
+            echo '<!-- terraform-azure-finops-pr-guardrail -->'
+            echo '## Terraform Azure FinOps Guardrail'
+            echo
+            echo '**Result:** FAIL'
+            echo
+            echo 'The evaluator could not produce a result. Check the workflow logs for the validation error.'
+          } > "$COMMENT_PATH"
+        fi
+
+        echo "result=$result" >> "$GITHUB_OUTPUT"
+        echo "comment-path=$COMMENT_PATH" >> "$GITHUB_OUTPUT"
+        exit 0
+    - name: Update pull-request comment
+      if: ${{ always() && inputs.pull-request-number != '' && inputs.github-token != '' }}
+      continue-on-error: true
+      uses: actions/github-script@v9
+      env:
+        COMMENT_PATH: ${{ steps.evaluate.outputs.comment-path }}
+        PULL_REQUEST_NUMBER: ${{ inputs.pull-request-number }}
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const fs = require('fs');
+          const marker = '<!-- terraform-azure-finops-pr-guardrail -->';
+          const body = fs.readFileSync(process.env.COMMENT_PATH, 'utf8');
+          const issue_number = Number(process.env.PULL_REQUEST_NUMBER);
+          const comments = await github.paginate(github.rest.issues.listComments, {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number,
+            per_page: 100
+          });
+          const previous = comments.find((comment) => comment.user.type === 'Bot' && comment.body.includes(marker));
+          if (previous) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: previous.id,
+              body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              body
+            });
+          }
+    - name: Apply guardrail result
+      if: ${{ always() }}
+      shell: bash
+      env:
+        RESULT: ${{ steps.evaluate.outputs.result }}
+      run: |
+        if [ "$RESULT" = "fail" ]; then
+          echo "Terraform Azure FinOps Guardrail failed. Correct the blocking findings in the pull-request comment or workflow output."
+          exit 1
+        fi

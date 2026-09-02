@@ -15,6 +15,7 @@ Start here for the versioned product, technical, testing, and operating document
 ## Current baseline
 
 - `architecture/01-terraform-plan-contract.md` defines the accepted Terraform JSON-plan input and safe parsing rules.
+- `architecture/02-github-actions-integration.md` defines the composite action, reusable workflow, permissions, and trust boundaries.
 - `testing/phase-1-fixture-matrix.md` describes the baseline scenarios in `../fixtures/`.
 
 ## Documentation rules

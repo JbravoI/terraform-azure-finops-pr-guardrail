@@ -187,15 +187,18 @@ export function renderPullRequestComment(result) {
 }
 
 async function main() {
-  const [planPath, configPath, outputPath] = process.argv.slice(2);
+  const [planPath, configPath, outputPath, resultPath] = process.argv.slice(2);
   if (!planPath || !configPath) {
-    throw new Error('Usage: node scripts/evaluate-plan.mjs <plan.json> <config.yml> [comment.md]');
+    throw new Error('Usage: node scripts/evaluate-plan.mjs <plan.json> <config.yml> [comment.md] [result.json]');
   }
   const [planText, configText] = await Promise.all([readFile(planPath, 'utf8'), readFile(configPath, 'utf8')]);
   const result = evaluatePlan(JSON.parse(planText), parseConfig(configText));
   const comment = renderPullRequestComment(result);
   if (outputPath) await writeFile(outputPath, comment, 'utf8');
   else process.stdout.write(comment);
+  if (resultPath) {
+    await writeFile(resultPath, JSON.stringify({ result: result.result, errors: result.errors, reviews: result.reviews }, null, 2), 'utf8');
+  }
   process.exitCode = result.result === 'fail' ? 1 : 0;
 }
 

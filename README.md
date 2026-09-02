@@ -62,4 +62,4 @@ Start with [`docs/README.md`](docs/README.md) for the versioned documentation in
 
 ## Status
 
-Phase 3 policy controls are complete locally. GitHub workflow, approval-rule, and live Infracost integration have not been implemented yet.
+Phase 4 reusable GitHub Actions assets are complete. GitHub-hosted execution, approval-rule configuration, and live Infracost integration have not been performed yet.
