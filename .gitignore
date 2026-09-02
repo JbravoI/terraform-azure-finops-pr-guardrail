@@ -1,0 +1,54 @@
+# Local delivery planning document; versioned project documentation belongs in docs/.
+strategy.md
+
+# Local environment settings and credentials. Commit documented, redacted examples only.
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Terraform local state, plans, overrides, and downloaded provider/module cache.
+# Keep .terraform.lock.hcl tracked for reproducible provider selection.
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfplan.json
+plan.out
+plan.json
+# Sanitised fixture plans are intentional test assets and may be versioned.
+!fixtures/**/plan.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+!*.tfvars.json.example
+
+# Local tool output, coverage, and package-manager logs.
+coverage/
+.nyc_output/
+reports/
+test-results/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor and operating-system metadata.
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+PATRICK_KOCH_DEVOPS_BENCHMARK_AND_IMPROVEMENT_PLAN.md
