@@ -17,7 +17,7 @@ inputs:
     default: ''
 outputs:
   result:
-    description: Guardrail result: pass, review, or fail.
+    description: "Guardrail result: pass, review, or fail."
     value: ${{ steps.evaluate.outputs.result }}
 runs:
   using: composite
