@@ -17,6 +17,9 @@ Start here for the versioned product, technical, testing, and operating document
 - `architecture/01-terraform-plan-contract.md` defines the accepted Terraform JSON-plan input and safe parsing rules.
 - `architecture/02-github-actions-integration.md` defines the composite action, reusable workflow, permissions, and trust boundaries.
 - `testing/phase-1-fixture-matrix.md` describes the baseline scenarios in `../fixtures/`.
+- `testing/test-matrix.md` records local and GitHub-hosted release evidence.
+- `operations/release-process.md` defines the release checklist and rollback approach.
+- `releases/` contains the release-notes draft and the real sample-PR evidence placeholder.
 
 ## Documentation rules
 

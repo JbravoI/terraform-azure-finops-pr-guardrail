@@ -4,7 +4,7 @@ Last updated: 2 September 2026
 
 ## Overall status
 
-**Phase 4 - Reusable workflow and hardening: complete.** The project now has a composite action, reusable workflow, fixture workflow, marker-based comment updater, and restricted workflow permissions. A live GitHub run and live Infracost integration have not occurred.
+**Phase 5 - Release readiness: local documentation complete; external evidence pending.** The project has its changelog, release process, troubleshooting guide, test matrix, release-notes draft, and sample-PR evidence template. A GitHub repository, tagged release, GitHub workflow run, sample PR, and live Infracost validation are still required before release publication.
 
 ## Delivery status by area
 
@@ -21,8 +21,8 @@ Last updated: 2 September 2026
 | PR feedback | Fixture implementation | Markdown renderer is tested locally; GitHub publication is not implemented. |
 | Tags and threshold controls | Implemented locally | Configurable YAML policy, stable finding IDs, blocking outcomes, and fixture coverage exist. |
 | Reusable workflow | Implemented | Composite action, reusable Terraform workflow, and fixture workflow are present; GitHub-hosted validation is pending. |
-| Release evidence | Planned | Phase 5. |
+| Release evidence | Local documentation complete | Changelog, test matrix, release process, notes draft, and sample-PR template exist; GitHub evidence is pending. |
 
 ## Next work
 
-Start Phase 5: complete release documentation, test matrix, troubleshooting evidence, changelog, release notes, and a sample pull request reference. Update this file and `docs/TRACEABILITY_MAP.md` whenever status changes.
+Complete the external release evidence: initialise or clone the Git repository, push the project, open a sample pull request, capture successful workflow links, validate the provider integration, and publish the reviewed tag and release notes.

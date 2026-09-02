@@ -62,4 +62,4 @@ Start with [`docs/README.md`](docs/README.md) for the versioned documentation in
 
 ## Status
 
-Phase 4 reusable GitHub Actions assets are complete. GitHub-hosted execution, approval-rule configuration, and live Infracost integration have not been performed yet.
+Phase 5 release documentation is complete locally. GitHub-hosted execution, approval-rule configuration, live Infracost integration, and release publication have not been performed yet.
