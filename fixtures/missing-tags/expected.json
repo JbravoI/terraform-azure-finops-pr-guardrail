@@ -8,6 +8,6 @@
       "missing_tags": ["cost_center", "product", "expiry"]
     }
   ],
-  "estimation_status": "pending",
-  "monthly_delta": null
+  "estimation_status": "estimated",
+  "monthly_delta": 73
 }

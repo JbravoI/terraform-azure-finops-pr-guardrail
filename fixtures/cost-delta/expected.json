@@ -3,6 +3,6 @@
   "normalised_resource_count": 1,
   "ignored_resource_count": 0,
   "required_tag_findings": [],
-  "estimation_status": "pending",
-  "monthly_delta": null
+  "estimation_status": "estimated",
+  "monthly_delta": 5
 }

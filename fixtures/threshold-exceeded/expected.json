@@ -4,8 +4,8 @@
   "ignored_resource_count": 0,
   "normalised_actions": ["delete", "create"],
   "required_tag_findings": [],
-  "estimation_status": "pending",
-  "monthly_delta": null,
+  "estimation_status": "estimated",
+  "monthly_delta": 80,
   "configured_monthly_cost_increase_threshold": 50,
-  "review_reason": "Cost threshold enforcement is deferred until Phase 2 pricing data is available."
+  "review_reason": "Estimated monthly increase exceeds the configured threshold."
 }

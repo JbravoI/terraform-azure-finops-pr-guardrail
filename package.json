@@ -1,0 +1,10 @@
+{
+  "name": "terraform-azure-finops-pr-guardrail",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --test",
+    "evaluate:fixture": "node scripts/evaluate-plan.mjs"
+  }
+}
