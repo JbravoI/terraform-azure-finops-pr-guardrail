@@ -1,5 +1,5 @@
 {
-  "result": "review",
+  "result": "fail",
   "normalised_resource_count": 1,
   "ignored_resource_count": 0,
   "normalised_actions": ["delete", "create"],

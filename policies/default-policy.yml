@@ -1,0 +1,15 @@
+# Copy this file into a consumer repository and adjust values for that workload.
+required_tags:
+  - owner
+  - environment
+  - cost_center
+  - product
+  - expiry
+
+# Monthly increase in USD that triggers cost_threshold_policy.
+monthly_cost_increase_threshold: 200
+
+# Allowed values: review or fail.
+# review returns a visible review finding; fail returns a non-zero evaluator exit code.
+unknown_cost_policy: review
+cost_threshold_policy: fail

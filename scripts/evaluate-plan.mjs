@@ -14,7 +14,12 @@ function hasUnknown(value) {
 }
 
 function parseConfig(text) {
-  const config = { required_tags: [], monthly_cost_increase_threshold: 0, unknown_cost_policy: 'review' };
+  const config = {
+    required_tags: [],
+    monthly_cost_increase_threshold: 0,
+    unknown_cost_policy: 'review',
+    cost_threshold_policy: 'review'
+  };
   let key = null;
 
   for (const rawLine of text.split(/\r?\n/)) {
@@ -30,6 +35,16 @@ function parseConfig(text) {
     const value = match[2].trim();
     if (key === 'required_tags') continue;
     config[key] = /^\d+(\.\d+)?$/.test(value) ? Number(value) : value;
+  }
+
+  if (!['review', 'fail'].includes(config.unknown_cost_policy)) {
+    throw new Error('unknown_cost_policy must be either review or fail.');
+  }
+  if (!['review', 'fail'].includes(config.cost_threshold_policy)) {
+    throw new Error('cost_threshold_policy must be either review or fail.');
+  }
+  if (!Number.isFinite(config.monthly_cost_increase_threshold) || config.monthly_cost_increase_threshold < 0) {
+    throw new Error('monthly_cost_increase_threshold must be a non-negative number.');
   }
 
   return config;
@@ -101,9 +116,26 @@ export function evaluatePlan(plan, config) {
   const unknown = estimates.filter((estimate) => estimate.status === 'unknown');
   const monthlyDelta = unknown.length ? null : estimates.reduce((total, estimate) => total + estimate.monthlyCost, 0);
   const thresholdExceeded = monthlyDelta !== null && monthlyDelta > config.monthly_cost_increase_threshold;
-  const result = tagFindings.length ? 'fail' : unknown.length || thresholdExceeded ? 'review' : 'pass';
+  const errors = [];
+  const reviews = [];
 
-  return { result, normalised, tagFindings, estimates, unknown, monthlyDelta, thresholdExceeded, config };
+  for (const finding of tagFindings) {
+    errors.push({ id: 'TAG_MISSING', address: finding.address, message: `Missing required tags: ${finding.missingTags.join(', ')}` });
+  }
+  for (const estimate of unknown) {
+    const finding = { id: 'COST_UNKNOWN', address: estimate.resource.address, message: estimate.reason };
+    (config.unknown_cost_policy === 'fail' ? errors : reviews).push(finding);
+  }
+  if (thresholdExceeded) {
+    const finding = {
+      id: 'COST_THRESHOLD_EXCEEDED',
+      message: `Estimated monthly increase of ${formatCurrency(monthlyDelta)} exceeds threshold ${formatCurrency(config.monthly_cost_increase_threshold)}.`
+    };
+    (config.cost_threshold_policy === 'fail' ? errors : reviews).push(finding);
+  }
+
+  const result = errors.length ? 'fail' : reviews.length ? 'review' : 'pass';
+  return { result, normalised, tagFindings, estimates, unknown, monthlyDelta, thresholdExceeded, errors, reviews, config };
 }
 
 export function renderPullRequestComment(result) {
@@ -137,7 +169,17 @@ export function renderPullRequestComment(result) {
   }
 
   if (result.thresholdExceeded) {
-    lines.push('', '### Cost threshold review', `The estimated increase exceeds the configured threshold of ${formatCurrency(result.config.monthly_cost_increase_threshold)} per month.`);
+    lines.push('', '### Cost threshold policy', `The estimated increase exceeds the configured threshold of ${formatCurrency(result.config.monthly_cost_increase_threshold)} per month. Configured outcome: **${result.config.cost_threshold_policy.toUpperCase()}**.`);
+  }
+
+  if (result.errors.length) {
+    lines.push('', '### Blocking findings');
+    for (const finding of result.errors) lines.push(`- **${finding.id}**${finding.address ? ` for \`${finding.address}\`` : ''}: ${finding.message}`);
+  }
+
+  if (result.reviews.length) {
+    lines.push('', '### Review findings');
+    for (const finding of result.reviews) lines.push(`- **${finding.id}**${finding.address ? ` for \`${finding.address}\`` : ''}: ${finding.message}`);
   }
 
   lines.push('', '> Estimate only. Actual Azure charges vary with usage, region, pricing, reservations, discounts, and service billing rules.');

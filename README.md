@@ -62,4 +62,4 @@ Start with [`docs/README.md`](docs/README.md) for the versioned documentation in
 
 ## Status
 
-Phase 2 fixture estimation and pull-request feedback baseline is complete. Live Infracost and GitHub integration have not been implemented yet.
+Phase 3 policy controls are complete locally. GitHub workflow, approval-rule, and live Infracost integration have not been implemented yet.

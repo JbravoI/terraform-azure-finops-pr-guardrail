@@ -10,7 +10,12 @@ async function loadScenario(name) {
     readFile(new URL('config.yml', root), 'utf8'),
     readFile(new URL('expected.json', root), 'utf8')
   ]);
-  const config = { required_tags: [], monthly_cost_increase_threshold: 0, unknown_cost_policy: 'review' };
+  const config = {
+    required_tags: [],
+    monthly_cost_increase_threshold: 0,
+    unknown_cost_policy: 'review',
+    cost_threshold_policy: 'review'
+  };
   let currentKey = null;
   for (const rawLine of configText.split(/\r?\n/)) {
     const line = rawLine.trim();
@@ -46,5 +51,8 @@ for (const name of ['cost-delta', 'missing-tags', 'threshold-exceeded', 'unknown
     const comment = renderPullRequestComment(actual);
     assert.match(comment, /Terraform Azure FinOps Guardrail/);
     assert.ok(comment.includes(`**Result:** ${expected.result.toUpperCase()}`));
+    if (name === 'missing-tags') assert.match(comment, /TAG_MISSING/);
+    if (name === 'threshold-exceeded') assert.match(comment, /COST_THRESHOLD_EXCEEDED/);
+    if (name === 'unknown-cost') assert.match(comment, /COST_UNKNOWN/);
   });
 }

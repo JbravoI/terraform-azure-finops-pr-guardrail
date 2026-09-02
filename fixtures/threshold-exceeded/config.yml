@@ -6,3 +6,4 @@ required_tags:
   - expiry
 monthly_cost_increase_threshold: 50
 unknown_cost_policy: review
+cost_threshold_policy: fail
