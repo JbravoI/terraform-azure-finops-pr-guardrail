@@ -1,6 +1,9 @@
 # Local delivery planning document; versioned project documentation belongs in docs/.
 strategy.md
 
+# Local delivery tracking; project documentation intended for version control lives in docs/.
+implementation/
+
 # Local environment settings and credentials. Commit documented, redacted examples only.
 .env
 .env.*

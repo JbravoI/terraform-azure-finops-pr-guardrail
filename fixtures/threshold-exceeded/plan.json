@@ -1,0 +1,38 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "azurerm_kubernetes_cluster.guardrail",
+      "mode": "managed",
+      "type": "azurerm_kubernetes_cluster",
+      "name": "guardrail",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {
+          "name": "aks-finops-fixture",
+          "tags": {
+            "owner": "platform-team",
+            "environment": "development",
+            "cost_center": "CC-1000",
+            "product": "finops-guardrail",
+            "expiry": "2026-12-31"
+          }
+        },
+        "after": {
+          "name": "aks-finops-fixture",
+          "sku_tier": "Standard",
+          "tags": {
+            "owner": "platform-team",
+            "environment": "development",
+            "cost_center": "CC-1000",
+            "product": "finops-guardrail",
+            "expiry": "2026-12-31"
+          }
+        },
+        "after_unknown": {}
+      }
+    }
+  ]
+}

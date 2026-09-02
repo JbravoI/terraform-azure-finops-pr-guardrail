@@ -1,0 +1,13 @@
+{
+  "result": "fail",
+  "normalised_resource_count": 1,
+  "ignored_resource_count": 0,
+  "required_tag_findings": [
+    {
+      "address": "azurerm_linux_web_app.missing_metadata",
+      "missing_tags": ["cost_center", "product", "expiry"]
+    }
+  ],
+  "estimation_status": "pending",
+  "monthly_delta": null
+}

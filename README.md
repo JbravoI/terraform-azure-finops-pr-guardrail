@@ -62,4 +62,4 @@ Start with [`docs/README.md`](docs/README.md) for the versioned documentation in
 
 ## Status
 
-Phase 0 repository baseline is complete. No workflow or cloud integration has been implemented yet.
+Phase 1 plan-contract and fixture baseline is complete. No executable workflow or cloud integration has been implemented yet.

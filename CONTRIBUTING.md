@@ -15,6 +15,7 @@ Thanks for contributing to Terraform Azure FinOps Pull-Request Guardrail.
 - Mark unpriced or unsupported resources as unknown; never represent them as zero cost.
 - Use clear failure messages that tell a pull-request author how to correct the issue.
 - Record lasting architectural or policy choices in `docs/decisions/`.
+- Do not use em dashes in documentation, comments, messages, or code; use clear punctuation such as a full stop, comma, colon, or parentheses instead.
 
 ## Documentation and status
 

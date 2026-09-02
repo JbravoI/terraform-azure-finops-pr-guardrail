@@ -4,13 +4,18 @@ Start here for the versioned product, technical, testing, and operating document
 
 ## Documentation areas
 
-- `product/` — intended users, capabilities, non-goals, and roadmap.
-- `architecture/` — workflow components, data flow, integrations, and trust boundaries.
-- `decisions/` — short architecture decision records (ADRs) for durable choices.
-- `features/` — behaviour and acceptance criteria grouped by capability.
-- `testing/` — fixture contract, test approach, and evidence.
-- `operations/` — configuration, permissions, troubleshooting, releases, and support.
-- `TRACEABILITY_MAP.md` — links requirements to policies, fixtures, tests, and implementation.
+- `product/`: intended users, capabilities, non-goals, and roadmap.
+- `architecture/`: workflow components, data flow, integrations, and trust boundaries.
+- `decisions/`: short architecture decision records (ADRs) for durable choices.
+- `features/`: behaviour and acceptance criteria grouped by capability.
+- `testing/`: fixture contract, test approach, and evidence.
+- `operations/`: configuration, permissions, troubleshooting, releases, and support.
+- `TRACEABILITY_MAP.md`: links requirements to policies, fixtures, tests, and implementation.
+
+## Current baseline
+
+- `architecture/01-terraform-plan-contract.md` defines the accepted Terraform JSON-plan input and safe parsing rules.
+- `testing/phase-1-fixture-matrix.md` describes the baseline scenarios in `../fixtures/`.
 
 ## Documentation rules
 

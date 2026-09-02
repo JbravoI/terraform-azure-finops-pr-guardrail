@@ -1,0 +1,30 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "azurerm_storage_account.finops_example",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "finops_example",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "stfinopsfixture001",
+          "account_tier": "Standard",
+          "account_replication_type": "LRS",
+          "tags": {
+            "owner": "platform-team",
+            "environment": "development",
+            "cost_center": "CC-1000",
+            "product": "finops-guardrail",
+            "expiry": "2026-12-31"
+          }
+        },
+        "after_unknown": {}
+      }
+    }
+  ]
+}

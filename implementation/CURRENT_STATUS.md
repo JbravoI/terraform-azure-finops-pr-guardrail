@@ -4,7 +4,7 @@ Last updated: 2 September 2026
 
 ## Overall status
 
-**Phase 0 — Repository baseline: complete.** The project has its entry-point README, contribution guidance, MIT licence, repository layout, documentation index, traceability baseline, and fixture contract. No executable workflow, Terraform-plan parser, pricing integration, policy engine, fixtures, or automated tests exist yet.
+**Phase 1 — Terraform plan and fixture contract: complete.** The project now defines the accepted Terraform JSON-plan input and includes four sanitised baseline fixtures. No executable workflow, Terraform-plan parser, pricing integration, policy engine, or automated tests exist yet.
 
 ## Delivery status by area
 
@@ -15,8 +15,8 @@ Last updated: 2 September 2026
 | Contribution guidance | Implemented | `CONTRIBUTING.md` establishes safety and evidence expectations. |
 | Documentation system | Implemented | `docs/` index, traceability map, and fixture contract exist. |
 | Repository layout | Implemented | Stable directories and scoped README placeholders exist for workflow, action, policies, scripts, tests, fixtures, and each documentation area. |
-| Fixture directories | Baseline created | Only fixture conventions exist; no test plan data has been added. |
-| Terraform plan contract | Planned | Phase 1. |
+| Fixture directories | Implemented | Four sanitised plan/config/expected-output scenario sets exist. |
+| Terraform plan contract | Implemented | `docs/architecture/01-terraform-plan-contract.md` defines the accepted input and normalised records. |
 | Cost estimation | Planned | Phase 2. |
 | PR feedback | Planned | Phase 2. |
 | Tags and threshold controls | Planned | Phase 3. |
@@ -25,4 +25,4 @@ Last updated: 2 September 2026
 
 ## Next work
 
-Start Phase 1: define the Terraform-plan input contract and add sanitised baseline fixtures for cost delta, missing tags, threshold exceeded, and unknown cost. Update this file and `docs/TRACEABILITY_MAP.md` whenever status changes.
+Start Phase 2: select and document the cost-estimation provider, then implement deterministic cost estimation and pull-request feedback against the Phase 1 fixtures. Update this file and `docs/TRACEABILITY_MAP.md` whenever status changes.

@@ -1,0 +1,31 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "azurerm_private_endpoint.unknown_network",
+      "mode": "managed",
+      "type": "azurerm_private_endpoint",
+      "name": "unknown_network",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "pe-finops-fixture",
+          "location": "westeurope",
+          "tags": {
+            "owner": "platform-team",
+            "environment": "development",
+            "cost_center": "CC-1000",
+            "product": "finops-guardrail",
+            "expiry": "2026-12-31"
+          }
+        },
+        "after_unknown": {
+          "private_service_connection": true
+        }
+      }
+    }
+  ]
+}

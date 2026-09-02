@@ -1,0 +1,25 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.9.8",
+  "resource_changes": [
+    {
+      "address": "azurerm_linux_web_app.missing_metadata",
+      "mode": "managed",
+      "type": "azurerm_linux_web_app",
+      "name": "missing_metadata",
+      "provider_name": "registry.terraform.io/hashicorp/azurerm",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "app-finops-fixture",
+          "tags": {
+            "owner": "platform-team",
+            "environment": "test"
+          }
+        },
+        "after_unknown": {}
+      }
+    }
+  ]
+}

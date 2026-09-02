@@ -1,0 +1,9 @@
+{
+  "result": "review",
+  "normalised_resource_count": 1,
+  "ignored_resource_count": 0,
+  "required_tag_findings": [],
+  "estimation_status": "unknown",
+  "unknown_cost_resources": ["azurerm_private_endpoint.unknown_network"],
+  "monthly_delta": null
+}

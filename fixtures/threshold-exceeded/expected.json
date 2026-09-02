@@ -1,0 +1,11 @@
+{
+  "result": "review",
+  "normalised_resource_count": 1,
+  "ignored_resource_count": 0,
+  "normalised_actions": ["delete", "create"],
+  "required_tag_findings": [],
+  "estimation_status": "pending",
+  "monthly_delta": null,
+  "configured_monthly_cost_increase_threshold": 50,
+  "review_reason": "Cost threshold enforcement is deferred until Phase 2 pricing data is available."
+}
